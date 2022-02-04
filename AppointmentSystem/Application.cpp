@@ -22,7 +22,7 @@ void Application::start()
 
             // first of all its checked, if id already exists or not.
             if (!validator.isIDAlreadyExists(id, this->appointments))
-            {   
+            {
                 // reading user name.
                 std::string name = this->inputReader.readName();
 
@@ -56,14 +56,17 @@ void Application::start()
         }
         else if (choice == 2)
         {
+            // printing all appoinements record.
             this->printAllRecords();
         }
         else if (choice == 3)
         {
+            // printing user by age.
             this->printByAge();
         }
         else if (choice == 4)
         {
+            // printing total number of male and female.
             this->printByGenderCount();
         }
         else
@@ -130,6 +133,7 @@ void Application::printByGenderCount()
     std::cout << "Number of Female: " << totalFemale << std::endl;
 }
 
+// TODO:
 int Application::countByAge(int age)
 {
     int counter = 0;
@@ -145,6 +149,7 @@ int Application::countByAge(int age)
     return counter;
 }
 
+// TODO:
 void Application::printByAge()
 {
     // To get max value from vector. this function is in header <algorithm> which is given by c++ community.
