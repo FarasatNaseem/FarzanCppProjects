@@ -4,32 +4,44 @@ void Application::start()
 {
     while (true)
     {
+        // print main menu of the application
         this->printMainMenu();
 
+        // reading choice from user.
         int choice = this->inputReader.readChoice();
 
+        // if choice is 0 then application will be closed.
         if (choice == 0)
         {
             break; // Application ending by entering 0.
         }
-        else if (choice == 1)
+        else if (choice == 1) // if choise is 1 then user will be able to enter new appointment data.
         {
+            // reading user id
             int id = this->inputReader.readID();
 
+            // first of all its checked, if id already exists or not.
             if (!validator.isIDAlreadyExists(id, this->appointments))
-            {
+            {   
+                // reading user name.
                 std::string name = this->inputReader.readName();
 
+                // reading user age.
                 int age = this->inputReader.readAge();
 
+                // reading user date of birth.
                 std::string dataOfBirth = this->inputReader.readDOB();
 
+                // reading position.
                 int position = this->inputReader.readPosition();
 
+                // then position will be checked, if position is not reserved yet then it will be taken by user.
                 if (!validator.isPositionAlreadyReserved(position, this->appointments))
                 {
+                    // reading user gender.
                     char gender = this->inputReader.readGender();
 
+                    // at the end storing new appointment in a vector.
                     this->appointments.push_back(Appointment(id, name, age, dataOfBirth, position, gender));
                 }
                 else
@@ -112,7 +124,7 @@ void Application::printByGenderCount()
     int totalMale = this->countByGender('M');
     int totalFemale = this->countByGender('F');
 
-    std::cout << "\n **** **** Printing All Records By Gender **** ****";
+    std::cout << "\n **** **** Printing All Records By Gender **** ****\n";
 
     std::cout << "Number of Male: " << totalMale << std::endl;
     std::cout << "Number of Female: " << totalFemale << std::endl;
