@@ -16,6 +16,8 @@ private:
     void printByGenderCount();
     int countByGender(char genderToCount);
     int countByAge(int age);
+    int getMaxAge(std::vector<int> personsAge);
+    std::vector<int> getPersonsAge();
 public:
     void start();
 };

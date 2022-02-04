@@ -4,10 +4,10 @@ int main(int argc, char const *argv[])
 {
     try
     {
-        // if (argc < 3)
-        // {
-        //     throw std::invalid_argument("Invalid credentials!!");
-        // }
+        if (argc < 3)
+        {
+            throw std::invalid_argument("Invalid credentials!!");
+        }
 
         Application application = Application();
 

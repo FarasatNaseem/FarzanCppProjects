@@ -13,6 +13,8 @@ void Application::start()
         // if choice is 0 then application will be closed.
         if (choice == 0)
         {
+            std::cout << "\nThanks for using our application. See you next time and stay healthy\n\n";
+
             break; // Application ending by entering 0.
         }
         else if (choice == 1) // if choise is 1 then user will be able to enter new appointment data.
@@ -86,6 +88,7 @@ void Application::printMainMenu()
     std::cout << " 0: To exit\n";
 }
 
+// 2
 void Application::printAllRecords()
 {
     std::cout << "\n **** **** Printing All Records **** ****";
@@ -122,6 +125,7 @@ int Application::countByGender(char genderToCount)
     return counter;
 }
 
+// 3
 void Application::printByGenderCount()
 {
     int totalMale = this->countByGender('M');
@@ -133,14 +137,49 @@ void Application::printByGenderCount()
     std::cout << "Number of Female: " << totalFemale << std::endl;
 }
 
-// TODO:
+// In order to implement the function. printByAge(), following functions are implemented.
+
+std::vector<int> Application::getPersonsAge()
+{
+    std::vector<int> personsAge;
+
+    for (int i = 0; i < this->appointments.size(); i++)
+    {
+        personsAge.push_back(this->appointments[i].getAge());
+    }
+
+    return personsAge;
+}
+
+int Application::getMaxAge(std::vector<int> personsAge)
+{
+    int max, min;
+
+    max = personsAge[0];
+    min = personsAge[0];
+
+    for (int i = 0; i < personsAge.size(); i++)
+    {
+        if (max < personsAge[i])
+        {
+            max = personsAge[i];
+        }
+        else if (min > personsAge[i])
+        {
+            min = personsAge[i];
+        }
+    }
+
+    return max;
+}
+
 int Application::countByAge(int age)
 {
     int counter = 0;
 
     for (int i = 0; i < this->appointments.size(); i++)
     {
-        // if (this->appointments[i].getGender() == genderToCount)
+        if (this->appointments[i].getAge() == age)
         {
             counter++;
         }
@@ -149,11 +188,28 @@ int Application::countByAge(int age)
     return counter;
 }
 
-// TODO:
+// 4
 void Application::printByAge()
 {
-    // To get max value from vector. this function is in header <algorithm> which is given by c++ community.
-    // auto maxAgePersonAppointment = *std::max_element(std::begin(this->appointments), std::end(this->appointments));
+    std::vector<int> personsAge = this->getPersonsAge();
 
-    // int personAbove50 = this->countByAge(50);
+    int maxAge = this->getMaxAge(personsAge);
+
+    int ageOfPerson = maxAge;
+
+    std::cout << "\n **** **** Printing All Records By Gender **** ****\n";
+
+    std::cout << "Persons more then " << maxAge << ": 0";
+
+    for (int i = 0; i < maxAge; i++)
+    {
+        int totalPersonOfSameAge = this->countByAge(ageOfPerson);
+
+        if (totalPersonOfSameAge != 0)
+        {
+            std::cout << "\nPersons of age " << ageOfPerson << ": " << totalPersonOfSameAge;
+        }
+
+        ageOfPerson--;
+    }
 }
